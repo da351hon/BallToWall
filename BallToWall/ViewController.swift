@@ -82,6 +82,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let convertedPosition = camera.convertPosition(position, to: nil)
         sphereNode.position = convertedPosition
 
+        // PhysicsBodyの設定
+        sphereNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        sphereNode.physicsBody?.mass = 0.2                  // 質量 0.2kg
+        sphereNode.physicsBody?.isAffectedByGravity = true  // 重力の影響を受ける
+        
+        // 初速を設定
+        // カメラから見て上に2m/s、奥に10m/sの初速を設定
+        let initialVector = SCNVector3(x: 0, y: 2.0, z: -10.0)
+        // ワールド座標系に変換
+        let convertedVector = camera.convertVector(initialVector, to: nil)
+        sphereNode.physicsBody?.velocity = convertedVector
+        
         // ノードを追加
         sceneView.scene.rootNode.addChildNode(sphereNode)
     }
