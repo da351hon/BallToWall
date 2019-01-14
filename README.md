@@ -11,9 +11,11 @@ SceneKit：簡単に3Dゲームを作ることができるフレームワー�
 <img src="images/ball_to_wall_select_swift_scene_kit.png" width="480"/>  
 
 3. 飛行機を削除し、垂直面認識指定を追加。  
-[変更内容](https://github.com/da351hon/DetectHPlane/commit/2a964fc8b8b52a165174da7134336c1e415335cf)
+[変更内容](https://github.com/da351hon/BallToWall/commit/6810d770134c071b4b2e5f605a9d8f604986a937)
 
-4. 画像検出時に3D文字を配置する処理を追加。  
-[変更内容](https://github.com/da351hon/DetectHPlane/commit/4280be1f1c8aea9408daf1aa038f70411c12b231)
+4. 垂直面検出時に平面を配置、更新する処理を追加。  
+[変更内容](https://github.com/da351hon/BallToWall/commit/b86712348f34e75ecb62c33648aadf2cfc60affd)
 
-5. 実行。
+5. 実行。  
+<img src="images/ball_to_wall_run_vplane.png" width="240"/>  
+
