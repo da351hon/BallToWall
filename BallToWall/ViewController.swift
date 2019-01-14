@@ -34,6 +34,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // ライトを追加
         sceneView.autoenablesDefaultLighting = true
+        
+        // タップの検出
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:
+            #selector(onTapped))
+        self.sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +59,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    // タップ検出時に呼び出される
+    @objc func onTapped(recognizer: UIGestureRecognizer) {
+        throwBall()
+    }
+    
+    // 球を投げる
+    func throwBall() {
+        // カメラ座標が取得できなければ何もしない
+        guard let camera = sceneView.pointOfView else { return }
+
+        // ノードの生成
+        let sphereNode = SCNNode()
+        // ジオメトリ(物体)として球を指定
+        sphereNode.geometry = SCNSphere(radius: 0.01)
+        sphereNode.geometry?.materials.first?.diffuse.contents = UIColor.yellow
+        // カメラから見て10cm先、1cm上の座標に球を配置
+        let position = SCNVector3(x: 0, y: 0.01, z: -0.1)
+        // ワールド座標系に変換
+        let convertedPosition = camera.convertPosition(position, to: nil)
+        sphereNode.position = convertedPosition
+
+        // ノードを追加
+        sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
     // MARK: - ARSCNViewDelegate
